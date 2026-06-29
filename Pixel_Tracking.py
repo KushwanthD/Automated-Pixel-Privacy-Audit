@@ -51,13 +51,12 @@ from openpyxl.utils import get_column_letter
 # the parser strips everything that is not a real business domain.
 # ═══════════════════════════════════════════════════════════════════════════════
 DOMAINS = """
-genorahealth.com
-rokittelemedicine.com
+
 
 """
 
-CITY          = "Los Angeles"
-BUSINESS_TYPE = "Telehealth"
+CITY          = "  "
+BUSINESS_TYPE = "  "
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
