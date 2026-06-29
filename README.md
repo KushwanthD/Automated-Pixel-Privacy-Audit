@@ -7,18 +7,23 @@ An automated privacy auditing tool that performs passive analysis of publicly ac
 Website
     │
     ▼
+    
 Page Discovery
     │
     ▼
+    
 Tracker Detection
     │
     ▼
+    
 Consent Analysis
     │
     ▼
+    
 Risk Assessment
     │
     ▼
+    
 Excel Report
 
 
