@@ -3,7 +3,7 @@
 An automated privacy auditing tool that performs passive analysis of publicly accessible healthcare websites to identify third-party tracking technologies, evaluate tracker behavior, and generate structured privacy assessment reports.
 
 ---
-## architecture diagram
+## Architecture 
 Website
     │
     ▼
