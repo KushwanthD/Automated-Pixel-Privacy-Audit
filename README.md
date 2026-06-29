@@ -197,12 +197,7 @@ All findings should be manually validated before disclosure.
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/Automated-Pixel-Privacy-Audit.git
-```
-
-Move into the project directory:
-
-```bash
+git clone https://github.com/KushwanthD/Automated-Pixel-Privacy-Audit.git
 cd Automated-Pixel-Privacy-Audit
 ```
 
@@ -218,8 +213,11 @@ Install Playwright browsers:
 playwright install
 ```
 
----
+Run the tool:
 
+```bash
+python Pixel_Tracking.py
+```
 ## Usage
 
 Run the scanner:
