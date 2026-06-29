@@ -1,194 +1,138 @@
 # Automated Pixel Privacy Audit
 
-An automated privacy auditing tool that performs passive analysis of publicly accessible healthcare websites to identify third-party tracking technologies, evaluate tracker behavior, and generate structured privacy assessment reports.
+An automated privacy auditing tool that identifies third-party tracking technologies on publicly accessible healthcare websites, analyzes their behavior, and generates structured Excel reports for security and privacy assessments.
 
 ---
 
 ## Overview
 
-Automated Pixel Privacy Audit is a Python-based browser automation tool designed to help security researchers, privacy auditors, and organizations identify third-party tracking technologies deployed on healthcare websites.
+Healthcare websites frequently integrate third-party services for analytics, advertising, appointment scheduling, and marketing. These integrations can introduce privacy risks when tracking technologies execute on patient-facing pages.
 
-The tool performs passive browser-based analysis without interacting with authenticated resources or protected patient information. It focuses on understanding how tracking technologies behave on publicly accessible patient-facing pages.
+Automated Pixel Privacy Audit performs passive browser-based analysis using Playwright to detect these technologies, analyze their behavior, and generate evidence-based reports.
 
-The assessment includes:
-
-- Third-party tracker detection
-- Consent banner detection
-- Tracker execution timing
-- Healthcare page classification
-- Browser identifier detection
-- Risk assessment
-- Excel report generation
+The tool only analyzes publicly accessible resources and does not require authentication or interact with protected patient information.
 
 ---
 
-## Features
+## Key Features
 
 ### Tracker Detection
 
-Automatically detects common tracking technologies including:
+Detects major third-party tracking technologies including:
 
-- Meta Pixel (Facebook)
-- Google Analytics (GA4)
-- Google Tag Manager
-- Google Ads / DoubleClick
-
----
-
-### Healthcare Page Discovery
-
-Automatically identifies healthcare-related pages such as:
-
-- Patient Portal
-- Telemedicine
-- Appointment Booking
-- Contact Forms
-- Login Pages
-- Registration Pages
+* Meta Pixel
+* Google Analytics (GA4)
+* Google Tag Manager
+* Google Ads
+* DoubleClick
 
 ---
 
-### Passive Network Analysis
+### Automated Page Discovery
 
-The tool captures browser network activity to determine:
+Automatically discovers pages such as:
 
-- Tracker vendors
-- Events fired
-- Request timing
-- Browser identifiers
-- Page metadata
-- Tracking behavior
+* Patient Portal
+* Login
+* Registration
+* Appointment Booking
+* Telehealth
+* Contact Pages
+
+---
+
+### Redirect Analysis
+
+Detects HTTP and browser redirects while crawling target websites.
 
 ---
 
 ### Consent Analysis
 
-Evaluates whether trackers execute:
+Identifies:
 
-- Before user interaction
-- Before consent
-- Without a visible consent mechanism
-
----
-
-### Automated Reporting
-
-Generates structured Excel reports containing:
-
-- Website information
-- Pages analyzed
-- Detected trackers
-- Privacy observations
-- Risk score
-- Supporting evidence
+* Visible consent banners
+* Tracker execution timing
+* Trackers firing before a visible consent mechanism
 
 ---
 
-## Detection Workflow
+### Payload Inspection
+
+Analyzes tracker requests for:
+
+* Browser identifiers
+* Event types
+* Page metadata
+* Request parameters
+
+---
+
+### Risk Assessment
+
+Automatically assigns a risk score based on:
+
+* Number of trackers
+* Consent observations
+* Page sensitivity
+* Payload characteristics
+
+---
+
+### Excel Report Generation
+
+Produces structured Excel reports with multiple worksheets including:
+
+* Executive Summary
+* Page Findings
+* Tracker Details
+
+---
+
+## Workflow
 
 ```
-Target Website
-        │
-        ▼
-Launch Playwright Browser
-        │
-        ▼
-Discover Patient-Facing Pages
-        │
-        ▼
-Capture Network Requests
-        │
-        ▼
-Identify Third-Party Trackers
-        │
-        ▼
-Analyze Consent Behaviour
-        │
-        ▼
-Evaluate Privacy Exposure
-        │
-        ▼
-Generate Audit Report
+                Target Website
+                       │
+                       ▼
+          Discover Public Pages
+                       │
+                       ▼
+      Identify Healthcare Pages
+                       │
+                       ▼
+      Launch Playwright Browser
+                       │
+                       ▼
+      Capture Network Requests
+                       │
+                       ▼
+     Detect Third-Party Trackers
+                       │
+                       ▼
+      Analyze Consent Behaviour
+                       │
+                       ▼
+      Inspect Tracker Payloads
+                       │
+                       ▼
+         Calculate Risk Score
+                       │
+                       ▼
+        Generate Excel Report
 ```
 
 ---
 
 ## Technologies Used
 
-- Python
-- Playwright
-- Requests
-- BeautifulSoup
-- Pandas
-- OpenPyXL
-
----
-
-## Reported Information
-
-The generated report may include:
-
-- Redirect Information
-- Tracker Vendors
-- Tracker Events
-- Healthcare Page Classification
-- Consent Banner Presence
-- Browser Identifier Detection
-- Request Timing
-- Privacy Risk Assessment
-
----
-
-## Example Findings
-
-The scanner is capable of identifying observations such as:
-
-- Meta Pixel executing on patient-facing pages.
-- Google Tag Manager loaded before user interaction.
-- Third-party trackers active without a visible consent mechanism.
-- Browser identifiers transmitted to third-party analytics providers.
-- Multiple tracking technologies operating simultaneously on healthcare pages.
-
----
-
-## Ethical Use
-
-This project is intended for:
-
-- Security research
-- Privacy assessments
-- Internal security reviews
-- Responsible disclosure
-- Educational purposes
-
-The scanner only analyzes publicly accessible resources and passive browser network activity.
-
-It **does not**:
-
-- bypass authentication
-- exploit vulnerabilities
-- access patient accounts
-- collect protected health information (PHI)
-- modify target systems
-- perform intrusive testing
-
-Always obtain appropriate authorization before conducting assessments beyond publicly accessible resources.
-
----
-
-## Limitations
-
-Current capabilities include client-side privacy analysis only.
-
-The tool does **not**:
-
-- determine regulatory compliance
-- identify server-side tracking
-- inspect authenticated user sessions
-- access protected patient records
-- infer legal violations
-
-All findings should be manually validated before disclosure.
+* Python
+* Playwright
+* Requests
+* BeautifulSoup4
+* Pandas
+* OpenPyXL
+* lxml
 
 ---
 
@@ -198,6 +142,11 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/KushwanthD/Automated-Pixel-Privacy-Audit.git
+```
+
+Move into the project:
+
+```bash
 cd Automated-Pixel-Privacy-Audit
 ```
 
@@ -213,49 +162,96 @@ Install Playwright browsers:
 playwright install
 ```
 
+---
+
+## Usage
+
 Run the tool:
 
 ```bash
 python Pixel_Tracking.py
 ```
-## Usage
-
-Run the scanner:
-
-```bash
-python Pixel_Tracking.py
-```
-
-Provide the target website when prompted.
 
 The tool will automatically:
 
 1. Launch a browser session.
-2. Discover relevant healthcare pages.
+2. Discover publicly accessible pages.
 3. Capture network requests.
 4. Detect third-party trackers.
-5. Analyze privacy-related observations.
-6. Generate an Excel report.
+5. Analyze consent behavior.
+6. Calculate a risk score.
+7. Generate an Excel report.
 
 ---
 
-## Future Enhancements
+## Report Contents
 
-Planned improvements include:
+### Executive Summary
 
-- Additional tracker support
-- Cookie consent framework identification
-- Privacy policy correlation
-- Tracker visualization dashboard
-- Web application interface
-- Historical scan comparison
-- Automated evidence collection
-- Expanded healthcare page classification
+* Website information
+* Total pages analyzed
+* Tracker summary
+* Overall risk assessment
+
+### Page Findings
+
+* Page URL
+* Page classification
+* Redirect information
+* Consent observations
+* Detected trackers
+* Risk score
+
+### Tracker Details
+
+* Tracker vendor
+* Event type
+* Payload observations
+* Network request information
+
+---
+
+## Project Scope
+
+This project focuses on passive analysis of publicly accessible websites.
+
+It does **not**:
+
+* bypass authentication
+* access patient portals
+* collect protected health information (PHI)
+* exploit vulnerabilities
+* modify target systems
+* perform intrusive security testing
+
+---
+
+## Intended Use
+
+This project is intended for:
+
+* Security Research
+* Privacy Assessments
+* Responsible Disclosure
+* Internal Security Reviews
+* Educational Purposes
+
+---
+
+## Future Improvements
+
+* Support for additional tracker vendors
+* Cookie consent framework detection
+* Interactive web dashboard
+* Historical scan comparison
+* PDF report generation
+* Automated screenshots
+* Expanded healthcare page classification
 
 ---
 
 ## Disclaimer
 
-This project is intended solely for educational, research, and authorized security assessment purposes.
+This tool is intended solely for educational, research, and authorized security assessment purposes.
 
-The author is not responsible for misuse of this software. Users are responsible for ensuring that all assessments comply with applicable laws, organizational policies, and responsible disclosure practices.
+Users are responsible for ensuring that all assessments comply with applicable laws, organizational policies, and responsible disclosure practices.
